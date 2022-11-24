@@ -1,11 +1,11 @@
 from flask import Flask, request
-import json
+#import json
 # import pyrebase  #pip install pyrebase4
 
-import numpy as np
-import cv2
+#import numpy as np
+#import cv2
 
-from code_pattern1 import process
+#from code_pattern1 import process
 
 
 app = Flask(__name__)
