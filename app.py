@@ -27,6 +27,10 @@ def index():
 
     return json.dumps({"error_img": error.tolist(), "score": x_point})
 
+@app.route('/')
+def home():
+    return "Hello World"
+
 
 if __name__ == '__main__':
     app.run(debug=True)
