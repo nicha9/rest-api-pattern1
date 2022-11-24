@@ -1,22 +1,20 @@
-from typing import Pattern
-from cv2 import imwrite
-from numpy.core.records import array
-from numpy.lib.type_check import imag
+# from typing import Pattern
+# from cv2 import imwrite
+# from numpy.core.records import array
+# from numpy.lib.type_check import imag
 import cv2
-import matplotlib
+# import matplotlib
 import numpy as np
 from skimage.filters import threshold_sauvola
 from skimage import img_as_ubyte
-import glob
-import array as arr
+# import glob
+# import array as arr
 import imutils
-import random as rng
+# import random as rng
 from scipy.spatial import distance as dist
 from imutils import perspective
 from imutils import contours
-nfolder = 'new-count' #folder
-nfile = '2' #name-image
-nn = '%s' % (nfile) #count
+
 #Thresholding this method work with grayscale return with bw
 def thresh_sauvola(image,ksize) :
     thresh_sauvola = threshold_sauvola(image, window_size=ksize)
@@ -158,12 +156,6 @@ def pixPerMat(image):
     # load the image, convert it to grayscale, and blur it slightly
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     gray = cv2.GaussianBlur(gray, (7, 7), 0)
-    # perform edge detection, then perform a dilation + erosion to
-    # close gaps in between object edges
-    
-    #sobel_x = cv2.Sobel(gray, -1, 1, 0, ksize=5)
-    #sobel_y = cv2.Sobel(gray, -1, 0, 1, ksize=5)
-    #edged = cv2.addWeighted(sobel_x, 1, sobel_y, 1, 0)
 
     edged = cv2.Canny(gray, 0, 60)
     edged = cv2.dilate(edged, None, iterations=1)
@@ -376,27 +368,13 @@ def checkError(img):
     return mask_green
 
 def process(file):
-    #image_color = cv2.imread('D:/Work/CS303/img/img/%s.jpeg' % (nfile))
-    #image_color = cv2.imread(filepath) #D:/Work/CS303/img/img/66.jpeg
-    #image_color = cv2.imread('D:/Work/CS303/img/img/28.jpeg')
+
     image_gray = cv2.cvtColor(file,cv2.COLOR_BGR2GRAY)
 
     #ANSWER SHEET 
     image_thresh = thresh_sauvola(image_gray, 73)
     #cv2.imwrite('D:/project-final/pattern1-testlog/%s/%s-2-image_thresh.png' % (nfolder, nn) , image_thresh)
 
-    # Find contour and sort by contour area
-    #cnts = cv2.findContours(image_thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    #cnts = cnts[0] if len(cnts) == 2 else cnts[1]
-    #cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
-    # Find bounding box and extract ROI
-    #ROI_number = 0
-    #for c in cnts:
-        #x,y,w,h = cv2.boundingRect(c)
-        #image_color = image_color[y:y+h, x:x+w]
-        #break
-    #image_gray = cv2.cvtColor(image_color,cv2.COLOR_BGR2GRAY)
-    #image_thresh = thresh_sauvola(image_gray, 73)
     cnt = find_border(image_thresh)
     ans_noboder = delete_border(image_thresh, cnt)
 
