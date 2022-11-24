@@ -25,7 +25,8 @@ def index():
     print("point"+ str(x_point))
 
 
-    return json.dumps({"error_img": error.tolist(), "score": x_point})
+    # return json.dumps({"error_img": error.tolist(), "score": x_point}),200
+    return "json fail"
 
 @app.route('/')
 def home():
